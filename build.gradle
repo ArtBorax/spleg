@@ -1,0 +1,54 @@
+group 'net.bor'
+version '1.0'
+apply plugin: 'java'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    maven {
+        name 'Sponge maven repo'
+        url 'http://repo.spongepowered.org/maven'
+    }
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'http://nexus.hc.to/content/repositories/pub_releases' }
+    flatDir {
+        dirs "$rootProject.projectDir/libs"
+    }
+}
+
+configurations {
+    addjar
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+dependencies {
+    compile group: 'net.milkbowl.vault', name: 'VaultAPI', version: '1.6'
+    compile 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
+    //compile name: 'MagicSpells'
+    //addjar name: 'MagicSpells'
+}
+
+
+
+compileJava { 
+    options.encoding = "UTF-8" 
+}  
+
+task fatJar(type: Jar) {
+    from {
+        configurations.addjar.collect {
+            if(it.isDirectory()){
+                it
+            }else{
+                zipTree(it)
+            }
+        }
+    }
+    with jar
+}
+
+tasks.build.dependsOn('fatJar')
+buildDir = new File(rootProject.projectDir, "build/")

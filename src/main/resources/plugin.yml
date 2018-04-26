@@ -1,0 +1,5 @@
+name: Spleg
+author: ArtBorax
+main: net.bor.spleg.Spleg
+version: 1.0
+softdepend: [Vault]

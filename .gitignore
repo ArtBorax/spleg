@@ -1,0 +1,17 @@
+.gradle/
+.nb-gradle/
+/build/
+/nbproject/
+/nbbuild/
+/test/
+/dist/
+/nbdist/
+/nbactions.xml
+/files/
+/config/
+config.cfg
+config.yml
+server.cfg
+server.yml
+server.log
+config.json
